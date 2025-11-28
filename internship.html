@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>인턴 경험 - xaehn Resume</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #000;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .nav {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+    }
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    .nav a:hover, .nav a.active {
+      color: #4a9eff;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #000;
+      padding-bottom: 1rem;
+    }
+    .internship-item {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4a9eff;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .internship-item:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translateX(4px);
+    }
+    .company {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 0.3rem;
+    }
+    .position {
+      color: #4a9eff;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .period {
+      color: #999;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+    .description {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      background: #f0f0f0;
+      color: #333;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>xaehn</h1>
+  </header>
+
+  <nav class="nav">
+    <a href="index.html">홈</a>
+    <a href="awards.html">수상</a>
+    <a href="internship.html" class="active">인턴</a>
+    <a href="projects.html">프로젝트</a>
+  </nav>
+
+  <main>
+    <h2>인턴 경험</h2>
+    <div id="internships-container"></div>
+  </main>
+
+  <script>
+    async function loadInternships() {
+      try {
+        const response = await fetch('../data/resume.json');
+        const data = await response.json();
+        const container = document.getElementById('internships-container');
+        
+        data.internships.forEach(internship => {
+          const skillsHtml = internship.skills.map(skill => 
+            `<span class="skill-tag">${skill}</span>`
+          ).join('');
+          
+          const div = document.createElement('div');
+          div.className = 'internship-item';
+          div.innerHTML = `
+            <div class="company">${internship.company}</div>
+            <div class="position">${internship.position}</div>
+            <div class="period">${internship.startDate} ~ ${internship.endDate}</div>
+            <div class="description">${internship.description}</div>
+            <div class="skills">${skillsHtml}</div>
+          `;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        console.error('데이터 로드 실패:', error);
+        document.getElementById('internships-container').innerHTML = '<p>데이터를 로드할 수 없습니다.</p>';
+      }
+    }
+    
+    loadInternships();
+  </script>
+</body>
+</html>
