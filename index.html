@@ -7,42 +7,14 @@
   <title>xaehn Resume</title>
 </head>
 <body>
-  <div id="nav-container"></div>
-  <div id="sidebar-container"></div>
+  <!-- 네비게이터 -->
+  <div>
+    <?php include 'navigation.html'; ?>
+  </div>
 
-  <script>
-    // 네비게이터 로드
-    fetch('./navigation.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('nav-container').innerHTML = html;
-
-        // sidebar 토글 이벤트
-        const toggleBtn = document.getElementById('sidebar-toggle');
-        toggleBtn.addEventListener('click', () => {
-          document.getElementById('sidebar').classList.add('show');
-        });
-      });
-
-    // 사이드바 로드
-    fetch('./sidebar.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sidebar-container').innerHTML = html;
-
-        const closeBtn = document.getElementById('sidebar-close');
-        closeBtn.addEventListener('click', () => {
-          document.getElementById('sidebar').classList.remove('show');
-        });
-
-        // 현재 페이지 active
-        const links = document.querySelectorAll('.sidebar a');
-        links.forEach(link => {
-          if (link.href === window.location.href) {
-            link.classList.add('active');
-          }
-        });
-      });
-  </script>
+  <!-- 사이드바 -->
+  <div>
+    <?php include 'sidebar.html'; ?>
+  </div>
 </body>
 </html>
