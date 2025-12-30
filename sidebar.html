@@ -1,0 +1,61 @@
+<!-- sidebar.html -->
+<div id="sidebar" class="sidebar">
+  <button id="sidebar-close">&times;</button>
+  <a href="index.html">Activities</a>
+  <a href="awards.html">Awards</a>
+  <a href="certifications.html">Certifications</a>
+  <a href="education.html">Education</a>
+  <a href="language.html">Language</a>
+  <a href="lectures.html">Lectures</a>
+  <a href="projects.html">Projects</a>
+  <a href="resume.html">Resume</a>
+  <a href="volunteering.html">Volunteering</a>
+  <a href="work.html">Work Experience</a>
+</div>
+
+<style>
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* 숨김 상태 */
+    width: 250px;
+    height: 100%;
+    background: #111;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 1100;
+  }
+
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+
+  .sidebar a:hover,
+  .sidebar a.active {
+    color: #4a9eff;
+  }
+
+  #sidebar-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    align-self: flex-end;
+    margin: 0 1rem 1rem 0;
+    cursor: pointer;
+  }
+
+  #sidebar-close:focus {
+    outline: none;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+</style>

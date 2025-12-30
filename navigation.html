@@ -1,20 +1,8 @@
 <!-- navigation.html -->
 <nav class="nav">
   <div class="nav-inner">
+    <button id="sidebar-toggle">&#9776;</button> <!-- 햄버거 아이콘 -->
     <span class="brand">xaehn</span>
-
-    <div class="nav-center">
-      <a href="index.html">Activities</a>
-      <a href="awards.html">Awards</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="education.html">Education</a>
-      <a href="language.html">Language</a>
-      <a href="lectures.html">Lectures</a>
-      <a href="projects.html">Projects</a>
-      <a href="resume.html">Resume</a>
-      <a href="volunteering.html">Volunteering</a>
-      <a href="work.html">Work Experience</a>
-    </div>
   </div>
 </nav>
 
@@ -26,9 +14,15 @@
     background: #111;
     padding: 1rem 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start;
     box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
   }
 
   .nav .brand {
@@ -36,18 +30,18 @@
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: 2px;
+    margin-left: 1rem;
   }
 
-  .nav-center a {
+  #sidebar-toggle {
+    background: transparent;
+    border: none;
     color: white;
-    text-decoration: none;
-    margin: 0 0.8rem;
-    font-size: 0.95rem;
-    transition: 0.3s;
+    font-size: 1.5rem;
+    cursor: pointer;
   }
 
-  .nav-center a:hover,
-  .nav-center a.active {
-    color: #4a9eff;
+  #sidebar-toggle:focus {
+    outline: none;
   }
 </style>
