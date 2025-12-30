@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +7,25 @@
 </head>
 <body>
   <!-- 네비게이터 -->
-  <div>
-    <?php include 'navigation.html'; ?>
-  </div>
+  <div id="nav-container"></div>
 
   <!-- 사이드바 -->
-  <div>
-    <?php include 'sidebar.html'; ?>
-  </div>
+  <div id="sidebar-container"></div>
+
+  <script>
+    // navigation.html 불러오기
+    fetch('./navigation.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+      });
+
+    // sidebar.html 불러오기
+    fetch('./sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-container').innerHTML = html;
+      });
+  </script>
 </body>
 </html>
