@@ -12,6 +12,11 @@
     color: #333;
   }
 
+  /* 체크박스 숨김 */
+  #sidebar-toggle {
+    display: none;
+  }
+
   /* 네비게이터 */
   .nav {
     position: sticky;
@@ -24,6 +29,7 @@
     justify-content: center;
   }
 
+  /* 햄버거 버튼 */
   .hamburger {
     position: absolute;
     left: 1rem;
@@ -33,6 +39,7 @@
     user-select: none;
   }
 
+  /* 중앙 브랜드 */
   .brand {
     color: white;
     font-weight: bold;
@@ -41,10 +48,6 @@
   }
 
   /* 사이드바 */
-  #sidebar-toggle {
-    display: none;
-  }
-
   .sidebar {
     position: fixed;
     top: 0;
@@ -59,11 +62,12 @@
     z-index: 1100;
   }
 
-  /* 체크박스 체크 시 사이드바 열기 */
+  /* 사이드바 열기 */
   #sidebar-toggle:checked + .nav + .sidebar {
     left: 0;
   }
 
+  /* 사이드바 링크 */
   .sidebar a {
     color: white;
     text-decoration: none;
@@ -77,6 +81,7 @@
     color: #4a9eff;
   }
 
+  /* 사이드바 닫기 버튼 */
   .sidebar-close {
     background: transparent;
     border: none;
