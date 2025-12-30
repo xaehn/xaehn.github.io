@@ -1,112 +1,29 @@
 <!-- index.html -->
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>xaehn Resume</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #f5f5f5;
-      color: #333;
-    }
-
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #111;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1.5rem;
-      font-size: 0.95rem;
-      transition: 0.3s;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      color: #4a9eff;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    section {
-      background: white;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 3px solid #000;
-      padding-bottom: 0.8rem;
-    }
-
-    .placeholder {
-      color: #aaa;
-      font-size: 0.95rem;
-      font-style: italic;
+      margin: 0;
+      padding: 0;
     }
   </style>
 </head>
-
 <body>
-
   <div id="nav-container"></div>
-
-  <main>
-    <section>
-      <h2>학력</h2>
-      <p class="placeholder">여기에 학력 내용을 작성하세요.</p>
-    </section>
-
-    <section>
-      <h2>소개</h2>
-      <p class="placeholder">자기소개 내용을 작성하세요.</p>
-    </section>
-
-    <section>
-      <h2>수상 경력</h2>
-      <p class="placeholder">수상 요약을 작성하세요.</p>
-    </section>
-
-    <section>
-      <h2>인턴 경험</h2>
-      <p class="placeholder">인턴 경험 요약을 작성하세요.</p>
-    </section>
-
-    <section>
-      <h2>프로젝트</h2>
-      <p class="placeholder">대표 프로젝트를 작성하세요.</p>
-    </section>
-  </main>
 
   <script>
     fetch('./navigation.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('nav-container').innerHTML = html;
-        const links = document.querySelectorAll('.nav a');
+
+        const links = document.querySelectorAll('.nav-center a');
         links.forEach(link => {
           if (link.href === window.location.href) {
             link.classList.add('active');
@@ -114,6 +31,5 @@
         });
       });
   </script>
-
 </body>
 </html>
