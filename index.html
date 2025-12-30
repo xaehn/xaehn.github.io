@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>xaehn Resume</title>
 <style>
-  /* --- body 기본 스타일 --- */
+  /* --- 전체 body 기본 스타일 --- */
   body {
     margin: 0; /* 브라우저 기본 여백 제거 */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* 글꼴 설정 */
@@ -13,20 +13,19 @@
     color: #333; /* 기본 텍스트 색 */
   }
 
-  /* --- 체크박스 숨김 --- */
+  /* --- 체크박스 숨김 (토글용) --- */
   #sidebar-toggle {
-    display: none; /* 화면에 표시되지 않음, 기능용 */
+    display: none; /* 화면에 표시되지 않음 */
   }
-  /* 설명: 체크박스를 이용해서 CSS만으로 사이드바 열기/닫기를 구현함.
-     체크박스가 체크되면 :checked 상태가 되고, CSS 선택자로 사이드바를 이동시킬 수 있음 */
+  /* 체크박스가 선택된 상태(:checked)인지 아닌지로 사이드바 열림/닫힘 상태를 CSS만으로 제어 */
 
   /* --- 네비게이터 --- */
   .nav {
-    position: sticky; /* 스크롤해도 상단에 고정 */
-    top: 0; /* 화면 상단에 붙음 */
-    z-index: 1000; /* 다른 요소 위에 표시되도록 */
-    background: #111; /* 네비 배경색 */
-    height: 60px; /* 높이 */
+    position: sticky; /* 스크롤해도 상단 고정 */
+    top: 0; /* 화면 최상단 위치 */
+    z-index: 1000; /* 사이드바보다 낮게 설정 (사이드바는 1100) */
+    background: #111; /* 배경 색상 */
+    height: 60px; /* 네비 높이 */
     display: flex; /* 내부 요소 수평 배치 */
     align-items: center; /* 세로 가운데 정렬 */
     justify-content: center; /* 가로 가운데 정렬 */
@@ -34,69 +33,68 @@
 
   /* --- 햄버거 버튼 --- */
   .hamburger {
-    position: absolute; /* 네비 좌측 고정 */
-    left: 1rem;
-    font-size: 1.8rem; /* 크기 */
+    position: absolute; /* 네비 좌측에 고정 */
+    left: 1rem; /* 좌측 여백 */
+    font-size: 1.8rem; /* 버튼 크기 */
     color: white; /* 글자색 */
     cursor: pointer; /* 마우스 올리면 포인터 표시 */
-    user-select: none; /* 글자 드래그 방지 */
+    user-select: none; /* 텍스트 드래그 방지 */
   }
 
   /* --- 중앙 브랜드 텍스트 --- */
   .brand {
     color: white;
-    font-weight: bold; /* 글자 굵게 */
+    font-weight: bold; /* 볼드체 */
     font-size: 1.2rem;
-    letter-spacing: 2px; /* 글자 사이 여백 */
+    letter-spacing: 2px; /* 글자 사이 간격 */
   }
 
   /* --- 사이드바 --- */
   .sidebar {
-    position: fixed; /* 화면 스크롤과 상관없이 위치 고정 */
-    top: 0;
-    left: -180px; /* 초기에는 화면 왼쪽 밖으로 숨김 */
-    width: 180px; /* 사이드바 너비 */
-    height: 100%; /* 화면 전체 높이 */
+    position: fixed; /* 스크롤과 상관없이 고정 */
+    top: 60px; /* 네비게이터 아래부터 시작 */
+    left: -200px; /* 초기에는 화면 왼쪽 밖으로 숨김 */
+    width: 200px; /* 사이드바 너비 */
+    height: calc(100% - 60px); /* 화면 전체 높이에서 네비 높이 제외 */
     background: #111;
-    padding-top: 2rem;
+    padding-top: 1rem; /* 위쪽 여백 */
     display: flex;
-    flex-direction: column; /* 세로로 항목 배치 */
+    flex-direction: column; /* 세로로 메뉴 배치 */
     transition: left 0.3s ease; /* 슬라이드 애니메이션 */
     z-index: 1100; /* 네비보다 위 */
   }
 
-  /* --- 사이드바 열기 --- */
+  /* --- 햄버거 클릭 시 사이드바 열기/닫기 --- */
   #sidebar-toggle:checked + .nav + .sidebar {
-    left: 0; /* 체크되면 화면에 보이도록 이동 */
+    left: 0; /* 체크되면 화면 왼쪽으로 이동하여 열림 */
   }
-  /* 설명: 체크박스(#sidebar-toggle)가 체크되면 + (형제 선택자)로 nav 다음에 있는 .sidebar 선택
-     → left:0으로 화면 안으로 이동 */
+  /* 설명:
+     #sidebar-toggle 체크 여부에 따라
+     + 형제 선택자(nav 다음에 있는 .sidebar) 선택
+     left:0으로 슬라이드 열림 */
 
   /* --- 사이드바 링크 --- */
   .sidebar a {
-    color: white;
+    color: white; /* 글자색 */
     text-decoration: none; /* 밑줄 제거 */
-    padding: 1rem 1.5rem; /* 내부 여백 */
+    padding: 1rem 1.5rem; /* 여백 */
     font-size: 1rem;
-    font-weight: bold;
-    transition: 0.3s; /* 색 변화 시 부드럽게 */
+    font-weight: bold; /* 볼드체 */
+    transition: color 0.3s ease; /* 마우스 올릴 때 색 변화 부드럽게 */
   }
 
+  /* --- 사이드바 링크 hover 효과 --- */
   .sidebar a:hover {
-    color: #4a9eff; /* 마우스 올리면 포인트 색상 */
+    color: #4a9eff; /* 포인트 색상 */
   }
-  /* 설명: a:hover는 링크에 마우스를 올렸을 때 스타일 적용 */
 
-  /* --- 사이드바 닫기 버튼 --- */
-  .sidebar-close {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    align-self: flex-end; /* 오른쪽 끝으로 배치 */
-    margin: 0 1rem 1rem 0;
-    cursor: pointer;
+  /* --- 반응형 예제 (폭이 좁으면 더 좁게) --- */
+  @media (max-width: 500px) {
+    .sidebar {
+      width: 160px; /* 모바일에서 사이드바 폭 축소 */
+    }
   }
+
 </style>
 </head>
 <body>
@@ -113,9 +111,7 @@
 
   <!-- 사이드바 -->
   <div class="sidebar">
-    <!-- 닫기 버튼 -->
-    <label for="sidebar-toggle" class="sidebar-close">&times;</label>
-    <!-- 각 링크 클릭 시 해당 HTML 파일로 이동 -->
+    <!-- 사이드바 링크: 클릭 시 해당 html로 이동 -->
     <a href="index.html">Activities</a>
     <a href="projects.html">Projects</a>
     <a href="work.html">Work Experience</a>
