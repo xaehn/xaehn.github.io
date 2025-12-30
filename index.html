@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>xaehn Resume</title>
   <style>
-    /* 기본 스타일 */
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -22,9 +21,12 @@
       padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
+      justify-content: center; /* 중앙 정렬 */
     }
 
     .hamburger {
+      position: absolute;
+      left: 1.5rem;
       font-size: 1.5rem;
       color: white;
       cursor: pointer;
@@ -32,10 +34,9 @@
 
     .brand {
       color: white;
-      font-weight: 700;
+      font-weight: bold; /* bold체 */
       font-size: 1.2rem;
       letter-spacing: 2px;
-      margin: 0 auto; /* 중앙 정렬 */
     }
 
     /* 사이드바 */
@@ -80,33 +81,15 @@
     }
 
     /* 체크박스 체크 시 사이드바 열기 */
-    #sidebar-toggle:checked ~ .sidebar {
+    #sidebar-toggle:checked + .sidebar {
       left: 0;
     }
   </style>
 </head>
 <body>
+  <!-- 사이드바 토글 체크박스 (label과 sibling 구조 중요) -->
+  <input type="checkbox" id="sidebar-toggle">
+
   <!-- 네비게이터 -->
   <nav class="nav">
-    <!-- 사이드바 토글 -->
-    <label for="sidebar-toggle" class="hamburger">&#9776;</label>
-    <span class="brand">xaehn</span>
-  </nav>
-
-  <!-- 사이드바 -->
-  <input type="checkbox" id="sidebar-toggle">
-  <div class="sidebar">
-    <label for="sidebar-toggle" class="sidebar-close">&times;</label>
-    <a href="index.html">Activities</a>
-    <a href="awards.html">Awards</a>
-    <a href="certifications.html">Certifications</a>
-    <a href="education.html">Education</a>
-    <a href="language.html">Language</a>
-    <a href="lectures.html">Lectures</a>
-    <a href="projects.html">Projects</a>
-    <a href="resume.html">Resume</a>
-    <a href="volunteering.html">Volunteering</a>
-    <a href="work.html">Work Experience</a>
-  </div>
-</body>
-</html>
+    <label for="sidebar-toggle" cla
