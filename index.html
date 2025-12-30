@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,7 +18,6 @@
       color: #333;
     }
 
-    /* ===== NAV ===== */
     .nav {
       position: sticky;
       top: 0;
@@ -41,7 +41,6 @@
       color: #4a9eff;
     }
 
-    /* ===== MAIN ===== */
     main {
       max-width: 900px;
       margin: 2rem auto;
@@ -63,7 +62,6 @@
       padding-bottom: 0.8rem;
     }
 
-    /* 내용 비워둔 상태 표시용 (나중에 지워도 됨) */
     .placeholder {
       color: #aaa;
       font-size: 0.95rem;
@@ -74,53 +72,48 @@
 
 <body>
 
-  <!-- NAV ONLY -->
-  <nav class="nav">
-    <a href="index.html" class="active">홈</a>
-    <a href="awards.html">수상</a>
-    <a href="internship.html">인턴</a>
-    <a href="projects.html">프로젝트</a>
-  </nav>
+  <div id="nav-container"></div>
 
   <main>
-
-    <!-- EDUCATION FIRST -->
     <section>
       <h2>학력</h2>
-      <p class="placeholder">
-        여기에 학력 내용을 추가하세요.
-      </p>
+      <p class="placeholder">여기에 학력 내용을 작성하세요.</p>
     </section>
 
     <section>
       <h2>소개</h2>
-      <p class="placeholder">
-        자기소개 내용을 여기에 작성하세요.
-      </p>
+      <p class="placeholder">자기소개 내용을 작성하세요.</p>
     </section>
 
     <section>
       <h2>수상 경력</h2>
-      <p class="placeholder">
-        수상 요약 또는 핵심 성과를 여기에 작성하세요.
-      </p>
+      <p class="placeholder">수상 요약을 작성하세요.</p>
     </section>
 
     <section>
       <h2>인턴 경험</h2>
-      <p class="placeholder">
-        인턴 경험 요약을 여기에 작성하세요.
-      </p>
+      <p class="placeholder">인턴 경험 요약을 작성하세요.</p>
     </section>
 
     <section>
       <h2>프로젝트</h2>
-      <p class="placeholder">
-        대표 프로젝트를 여기에 작성하세요.
-      </p>
+      <p class="placeholder">대표 프로젝트를 작성하세요.</p>
     </section>
-
   </main>
+
+  <script>
+    fetch('./navigation.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+        const links = document.querySelectorAll('.nav a');
+        links.forEach(link => {
+          if (link.href === window.location.href) {
+            link.classList.add('active');
+          }
+        });
+      });
+  </script>
 
 </body>
 </html>
