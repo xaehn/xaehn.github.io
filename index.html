@@ -15,79 +15,125 @@
 
   /* --- 체크박스 숨김 (토글용) --- */
   #sidebar-toggle {
-    display: none; /* 화면에 표시되지 않음 */
+    display: none; /* 화면에 표시되지 않음, CSS에서 토글 상태만 활용 */
   }
-  /* 체크박스가 선택된 상태(:checked)인지 아닌지로 사이드바 열림/닫힘 상태를 CSS만으로 제어 */
 
   /* --- 네비게이터 --- */
   .nav {
     position: sticky; /* 스크롤해도 상단 고정 */
-    top: 0; /* 화면 최상단 위치 */
-    z-index: 1000; /* 사이드바보다 낮게 설정 (사이드바는 1100) */
-    background: #111; /* 배경 색상 */
-    height: 60px; /* 네비 높이 */
-    display: flex; /* 내부 요소 수평 배치 */
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
+    top: 0;
+    z-index: 1000;
+    background: #111;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* --- 햄버거 버튼 --- */
   .hamburger {
-    position: absolute; /* 네비 좌측에 고정 */
-    left: 1rem; /* 좌측 여백 */
-    font-size: 1.8rem; /* 버튼 크기 */
-    color: white; /* 글자색 */
-    cursor: pointer; /* 마우스 올리면 포인터 표시 */
-    user-select: none; /* 텍스트 드래그 방지 */
+    position: absolute;
+    left: 1rem;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    user-select: none;
   }
 
   /* --- 중앙 브랜드 텍스트 --- */
   .brand {
     color: white;
-    font-weight: bold; /* 볼드체 */
+    font-weight: bold;
     font-size: 1.2rem;
-    letter-spacing: 2px; /* 글자 사이 간격 */
+    letter-spacing: 2px;
   }
 
   /* --- 사이드바 --- */
   .sidebar {
-    position: fixed; /* 스크롤과 상관없이 고정 */
-    top: 60px; /* 네비게이터 아래부터 시작 */
-    left: -200px; /* 초기에는 화면 왼쪽 밖으로 숨김 */
-    width: 200px; /* 사이드바 너비 */
-    height: calc(100% - 60px); /* 화면 전체 높이에서 네비 높이 제외 */
+    position: fixed;
+    top: 50px; /* 네비 아래 */
+    left: -200px; /* 숨김 상태 */
+    width: 200px;
+    height: calc(100% - 50px); /* 네비 제외 전체 높이 */
     background: #111;
-    padding-top: 1rem; /* 위쪽 여백 */
+    padding-top: 1rem;
     display: flex;
-    flex-direction: column; /* 세로로 메뉴 배치 */
-    transition: left 0.3s ease; /* 슬라이드 애니메이션 */
-    z-index: 1100; /* 네비보다 위 */
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 1100;
   }
 
-  /* --- 햄버거 클릭 시 사이드바 열기/닫기 --- */
+  /* --- 토글 체크시 사이드바 열기 --- */
   #sidebar-toggle:checked + .nav + .sidebar {
-    left: 0; /* 체크되면 화면 왼쪽으로 이동하여 열림 */
+    left: 0;
   }
-  /* 설명:
-     #sidebar-toggle 체크 여부에 따라
-     + 형제 선택자(nav 다음에 있는 .sidebar) 선택
-     left:0으로 슬라이드 열림 */
 
   /* --- 사이드바 링크 --- */
   .sidebar a {
-    color: white; /* 글자색 */
-    text-decoration: none; /* 밑줄 제거 */
-    padding: 1rem 1.5rem; /* 여백 */
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
-    font-weight: bold; /* 볼드체 */
-    transition: color 0.3s ease; /* 마우스 올릴 때 색 변화 부드럽게 */
+    font-weight: bold;
+    transition: color 0.3s ease;
   }
-
-  /* --- 사이드바 링크 hover 효과 --- */
   .sidebar a:hover {
-    color: #4a9eff; /* 포인트 색상 */
+    color: #4a9eff;
   }
 
+  /* --- 본문 영역 --- */
+  main {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  /* --- 섹션 제목 --- */
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: bold; /* 볼드체 */
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- 얇은 구분선 --- */
+  .divider-thin {
+    border-bottom: 1px solid #ccc;
+    margin: 0.5rem 0 1rem 0; /* 위/아래 여백 */
+  }
+
+  /* --- 굵은 구분선 --- */
+  .divider-bold {
+    border-bottom: 3px solid #000;
+    margin: 1.5rem 0;
+  }
+
+  /* --- 항목 카드 --- */
+  .item-card {
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #4a9eff; /* 포인트 색상 */
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  /* --- Show All 버튼 --- */
+  .show-all {
+    display: inline-block;
+    float: right;
+    margin-top: -2rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #111;
+    background: #4a9eff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  .show-all:hover {
+    background: #3578c6;
+  }
 </style>
 </head>
 <body>
@@ -96,15 +142,12 @@
 
   <!-- 네비게이터 -->
   <nav class="nav">
-    <!-- 햄버거 버튼: 체크박스 토글 -->
     <label for="sidebar-toggle" class="hamburger">&#9776;</label>
-    <!-- 중앙 브랜드 텍스트 -->
     <span class="brand">xaehn</span>
   </nav>
 
   <!-- 사이드바 -->
   <div class="sidebar">
-    <!-- 사이드바 링크: 클릭 시 해당 html로 이동 -->
     <a href="index.html">Activities</a>
     <a href="projects.html">Projects</a>
     <a href="work.html">Work Experience</a>
@@ -116,5 +159,46 @@
     <a href="language.html">Language</a>
     <a href="resume.html">Resume</a>
   </div>
+
+  <!-- --- 본문 --- -->
+  <main>
+    <!-- 학력 섹션 -->
+    <div class="section-title">Education</div>
+    <div class="divider-thin"></div>
+    <!-- 내용 예시: endDate 늦은 순서 -->
+    <div class="item-card">
+      <div>Bachelor of Electrical and Computer Engineering</div>
+      <div>Ajou University, Suwon, Korea</div>
+      <div>2019-03 ~ Present</div>
+    </div>
+    <div class="item-card">
+      <div>High School Diploma</div>
+      <div>Daejeon Daeseong High School</div>
+      <div>2016-03 ~ 2019-02</div>
+    </div>
+    <div class="item-card">
+      <div>Middle School</div>
+      <div>Daejeon Jijok Middle School</div>
+      <div>2013-03 ~ 2016-02</div>
+    </div>
+
+    <div class="divider-bold"></div>
+
+    <!-- 프로젝트 섹션 -->
+    <div class="section-title">Projects
+      <a href="projects.html" class="show-all">Show All →</a>
+    </div>
+    <div class="divider-thin"></div>
+    <!-- 프로젝트 예시 카드 -->
+    <div class="item-card">
+      <div>IoT Home Automation</div>
+      <div>2024-01 ~ 2024-06</div>
+    </div>
+    <div class="item-card">
+      <div>Embedded System Robot</div>
+      <div>2023-05 ~ 2023-12</div>
+    </div>
+    <div class="divider-bold"></div>
+  </main>
 </body>
 </html>
