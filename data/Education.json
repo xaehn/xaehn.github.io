@@ -1,0 +1,36 @@
+{
+  "education": [
+    {
+      "startDate": "2008-03-03",
+      "endDate": "2014-02-14",
+      "institution": "Daejeon Jijok Elementary School",
+      "major": "",
+      "location": "Yuseong-gu, Daejeon, Republic of Korea",
+      "status": "Graduated"
+    },
+    {
+      "startDate": "2014-03-03",
+      "endDate": "2017-02-08",
+      "institution": "Daejeon Jijok Middle School",
+      "major": "",
+      "location": "Yuseong-gu, Daejeon, Republic of Korea",
+      "status": "Graduated"
+    },
+    {
+      "startDate": "2017-03-02",
+      "endDate": "2020-02-05",
+      "institution": "Daejeon Daeseong High School",
+      "major": "Science and Engineering",
+      "location": "Jung-gu, Daejeon, Republic of Korea",
+      "status": "Graduated"
+    },
+    {
+      "startDate": "2020-03-02",
+      "endDate": "",
+      "institution": "Ajou University",
+      "major": "Electrical and Computer Engineering",
+      "location": "Yeongtong-gu, Suwon, Gyeonggi-do, Republic of Korea",
+      "status": "Enrolled"
+    }
+  ]
+}
