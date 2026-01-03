@@ -1,0 +1,17 @@
+{
+  "languages": [
+    {
+      "name": "",
+      "language": "",
+      "certificateNumber": "",
+      "score": "",
+      "testDate": "",
+      "issuer": "",
+      "validity": {
+        "type": "no-expiration",
+        "expirationDate": null
+      },
+      "visibility": true
+    }
+  ]
+}

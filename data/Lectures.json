@@ -1,0 +1,28 @@
+{
+  "lectures": [
+    {
+      "name": "반도체 생산 및 공정 기술 이론",
+      "startDate": "2023-01-16",
+      "endDate": "2023-01-26",
+      "totalTime": "",
+      "organizer": [
+        "한국반도체산업협회"
+      ],
+      "mode": "Online",
+      "status": "Completed",
+      "visibility": true
+    },
+    {
+      "name": "회로설계 핵심이론 및 시뮬레이션",
+      "startDate": "2023-01-16",
+      "endDate": "2023-01-26",
+      "totalTime": "",
+      "organizer": [
+        "한국반도체산업협회"
+      ],
+      "mode": "Online",
+      "status": "Completed",
+      "visibility": true
+    }
+  ]
+}
