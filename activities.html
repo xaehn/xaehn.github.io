@@ -161,21 +161,30 @@ main {
 </div>
 
 <script>
-fetch("data/activities.json")
+fetch("data/Activities.json")
   .then(res => res.json())
-  .then(data => renderList(data));
+  .then(json => renderList(json.activities));
 
 const listEl = document.getElementById("activity-list");
 const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modal-body");
 
+function formatDate(date) {
+  if (!date) return "Present";
+  const [y, m] = date.split("-");
+  return `${y}.${m}`;
+}
+
 function renderList(data) {
   data.forEach(item => {
     const div = document.createElement("div");
     div.className = "item";
+
+    const dept = item.department ? ` ${item.department}` : "";
     div.textContent =
-      `${item.startDate} ~ ${item.endDate} ` +
-      `${item.organization} ${item.name} ${item.department} ${item.role}`;
+      `${formatDate(item.startDate)} ~ ${formatDate(item.endDate)} ` +
+      `${item.organization} ${item.name}${dept} ${item.role}`;
+
     div.onclick = () => openModal(item);
     listEl.appendChild(div);
   });
@@ -184,14 +193,24 @@ function renderList(data) {
 function openModal(item) {
   modalBody.innerHTML = `
     <h3>${item.organization} - ${item.name}</h3>
-    <p>${item.department} / ${item.role}</p>
-    <p>${item.startDate} ~ ${item.endDate}</p>
+    <p>${item.department ?? ""} ${item.role}</p>
+    <p>${formatDate(item.startDate)} ~ ${formatDate(item.endDate)}</p>
+
     <h4>Activities</h4>
-    <ul>
-      ${item.detail.activities.map(a => `<li>${a}</li>`).join("")}
-    </ul>
+    ${
+      item.detail.activities.length
+        ? `<ul>${item.detail.activities.map(a =>
+            `<li><b>${a.title}</b> (${a.scale})<br>${a.description}</li>`
+          ).join("")}</ul>`
+        : "<p>No detailed activities.</p>"
+    }
+
     <h4>Files</h4>
-    ${item.detail.path.map(p => `<img src="${p}">`).join("")}
+    ${
+      item.detail.path.length
+        ? item.detail.path.map(p => `<img src="${p}">`).join("")
+        : "<p>No files.</p>"
+    }
   `;
   modal.style.display = "flex";
 }

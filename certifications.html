@@ -73,7 +73,6 @@
     color: #4a9eff;
   }
   
-  /* 활성화된 메뉴 스타일 */
   .sidebar a.active {
     color: #4a9eff;
     background: rgba(255, 255, 255, 0.1);
@@ -100,6 +99,9 @@
     transition: transform 0.2s, box-shadow 0.2s;
     font-size: 1rem;
     line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .list-item:hover {
@@ -107,11 +109,18 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
 
-  .item-text {
+  .item-date {
+    color: #666;
+    font-weight: 500;
+    margin-right: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .item-content {
+    color: #333;
     word-break: break-word;
   }
 
-  /* 모달 스타일 */
   .modal-overlay {
     display: none;
     position: fixed;
@@ -173,6 +182,11 @@
     padding-left: 1.2rem;
     color: #444;
   }
+  
+  .detail-sub-text {
+    font-size: 0.9em;
+    color: #666;
+  }
 </style>
 </head>
 <body>
@@ -196,7 +210,7 @@
   </div>
 
   <main id="main-container">
-    </main>
+  </main>
 
   <div class="modal-overlay" id="detail-modal">
     <div class="modal-window">
@@ -208,27 +222,31 @@
 <script>
   let activitiesData = [];
 
-  // 데이터 로드 함수
   async function loadData() {
     try {
-      const response = await fetch('data/activities.json');
+      const response = await fetch('data/Activities.json');
       if (!response.ok) throw new Error('Failed to load data');
       
       const jsonData = await response.json();
+      activitiesData = jsonData.activities || [];
       
-      // JSON 구조가 { "Activities": [...] } 형태인지, 바로 배열인지에 따라 조정 필요.
-      // 여기서는 질문의 맥락상 해당 파일이 배열 리스트를 담고 있거나, 
-      // 필드 구조에 맞는 리스트라고 가정하고 처리합니다.
-      // 만약 { "activities": [...] } 처럼 키가 있다면 jsonData.activities로 접근해야 합니다.
-      // 일단 배열로 들어온다고 가정합니다.
-      activitiesData = Array.isArray(jsonData) ? jsonData : (jsonData['Activities'] || []);
-      
+      activitiesData.sort((a, b) => {
+        if (!a.startDate) return 1;
+        if (!b.startDate) return -1;
+        return b.startDate.localeCompare(a.startDate);
+      });
+
       renderList();
     } catch (error) {
       console.error(error);
       document.getElementById('main-container').innerHTML = 
-        '<div style="text-align:center; padding:2rem; color:#666;">Failed to load data. Please check data/activities.json</div>';
+        '<div style="text-align:center; padding:2rem; color:#666;">Failed to load data. Please check data/Activities.json</div>';
     }
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return 'Present';
+    return dateStr.substring(0, 7).replace('-', '.');
   }
 
   function renderList() {
@@ -241,13 +259,16 @@
 
     let html = '<div class="list-container">';
     activitiesData.forEach((item, index) => {
-      // 요청 형식: 555 ~ 666 111 222 333 444
-      // startDate ~ endDate organization name department role
-      const text = `${item.startDate} ~ ${item.endDate} &nbsp; <strong>${item.organization}</strong> &nbsp; ${item.name} &nbsp; ${item.department} &nbsp; ${item.role}`;
+      const start = formatDate(item.startDate);
+      const end = formatDate(item.endDate);
+      const department = item.department ? `&nbsp; ${item.department}` : '';
+      
+      const contentText = `<strong>${item.organization}</strong> &nbsp; ${item.name}${department} &nbsp; ${item.role}`;
       
       html += `
         <div class="list-item" onclick="openModal(${index})">
-          <span class="item-text">${text}</span>
+          <span class="item-date">${start} ~ ${end}</span>
+          <span class="item-content">${contentText}</span>
         </div>
       `;
     });
@@ -261,16 +282,24 @@
     const content = document.getElementById('modal-content');
 
     let activitiesHtml = '';
-    if (item.detail.activities && item.detail.activities.length > 0) {
-      activitiesHtml = '<h4>Activities</h4><ul class="modal-detail-list">';
-      item.detail.activities.forEach(act => {
-        activitiesHtml += `<li>${act}</li>`;
-      });
-      activitiesHtml += '</ul>';
+    if (item.detail && item.detail.activities && item.detail.activities.length > 0) {
+      const validActivities = item.detail.activities.filter(act => act.title || act.description);
+      
+      if (validActivities.length > 0) {
+        activitiesHtml = '<h4>Activities</h4><ul class="modal-detail-list">';
+        validActivities.forEach(act => {
+          let line = '';
+          if (act.title) line += `<strong>${act.title}</strong>`;
+          if (act.scale) line += ` (${act.scale})`;
+          if (act.description) line += ` : ${act.description}`;
+          activitiesHtml += `<li>${line}</li>`;
+        });
+        activitiesHtml += '</ul>';
+      }
     }
 
     let pathHtml = '';
-    if (item.detail.path && item.detail.path.length > 0) {
+    if (item.detail && item.detail.path && item.detail.path.length > 0) {
       pathHtml = '<h4>Links</h4><ul class="modal-detail-list">';
       item.detail.path.forEach(p => {
         pathHtml += `<li><a href="${p}" target="_blank">${p}</a></li>`;
@@ -278,13 +307,17 @@
       pathHtml += '</ul>';
     }
 
+    const start = formatDate(item.startDate);
+    const end = formatDate(item.endDate);
+    const departmentDisplay = item.department ? `<br><strong>Department:</strong> ${item.department}` : '';
+
     content.innerHTML = `
       <div class="modal-title">${item.name}</div>
       <div class="modal-meta">
-        <strong>Organization:</strong> ${item.organization}<br>
-        <strong>Department:</strong> ${item.department}<br>
-        <strong>Role:</strong> ${item.role}<br>
-        <strong>Period:</strong> ${item.startDate} ~ ${item.endDate}
+        <strong>Organization:</strong> ${item.organization}
+        ${departmentDisplay}
+        <br><strong>Role:</strong> ${item.role}
+        <br><strong>Period:</strong> ${start} ~ ${end}
       </div>
       <div class="modal-detail-section">
         ${activitiesHtml}
@@ -306,7 +339,6 @@
     }
   }
 
-  // 페이지 로드 시 실행
   loadData();
 </script>
 </body>
