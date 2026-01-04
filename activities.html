@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xaehn</title>
+<title>xaehn - Activities</title>
 <style>
 body {
   margin: 0;
@@ -88,7 +88,7 @@ main {
 }
 
 .item {
-  padding: 0.6rem 0;
+  padding: 0.7rem 0;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
 }
@@ -120,6 +120,11 @@ main {
   cursor: pointer;
   font-weight: bold;
 }
+
+.modal img {
+  max-width: 100%;
+  margin-top: 0.5rem;
+}
 </style>
 </head>
 <body>
@@ -128,24 +133,24 @@ main {
 
 <nav class="nav">
   <label for="sidebar-toggle" class="hamburger">&#9776;</label>
-  <span class="brand" id="nav-title">xaehn</span>
+  <span class="brand">Activities</span>
 </nav>
 
 <div class="sidebar">
-  <a href="#" data-section="Activities">Activities</a>
-  <a href="#" data-section="Awards">Awards</a>
-  <a href="#" data-section="Certifications">Certifications</a>
-  <a href="#" data-section="Education">Education</a>
-  <a href="#" data-section="Experience" class="active">Experience</a>
-  <a href="#" data-section="Language">Language</a>
-  <a href="#" data-section="Lectures">Lectures</a>
-  <a href="#" data-section="Projects">Projects</a>
-  <a href="#" data-section="Volunteering">Volunteering</a>
+  <a href="activities.html" class="active">Activities</a>
+  <a href="awards.html">Awards</a>
+  <a href="certifications.html">Certifications</a>
+  <a href="education.html">Education</a>
+  <a href="experience.html">Experience</a>
+  <a href="language.html">Language</a>
+  <a href="lectures.html">Lectures</a>
+  <a href="projects.html">Projects</a>
+  <a href="volunteering.html">Volunteering</a>
 </div>
 
 <main>
-  <div class="section-title">Experience</div>
-  <div id="list"></div>
+  <div class="section-title">Activities</div>
+  <div id="activity-list"></div>
 </main>
 
 <div class="modal" id="modal">
@@ -156,33 +161,25 @@ main {
 </div>
 
 <script>
-const data = [
-  {
-    organization: "111",
-    name: "222",
-    department: "333",
-    role: "444",
-    startDate: "2023.01",
-    endDate: "2024.02",
-    detail: {
-      activities: ["A", "B", "C"],
-      path: ["assets/img1.png", "assets/img2.png"]
-    }
-  }
-];
+fetch("data/activities.json")
+  .then(res => res.json())
+  .then(data => renderList(data));
 
-const list = document.getElementById("list");
+const listEl = document.getElementById("activity-list");
 const modal = document.getElementById("modal");
 const modalBody = document.getElementById("modal-body");
-const navTitle = document.getElementById("nav-title");
 
-data.forEach(item => {
-  const div = document.createElement("div");
-  div.className = "item";
-  div.textContent = `${item.startDate} ~ ${item.endDate} ${item.organization} ${item.name} ${item.department} ${item.role}`;
-  div.onclick = () => openModal(item);
-  list.appendChild(div);
-});
+function renderList(data) {
+  data.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.textContent =
+      `${item.startDate} ~ ${item.endDate} ` +
+      `${item.organization} ${item.name} ${item.department} ${item.role}`;
+    div.onclick = () => openModal(item);
+    listEl.appendChild(div);
+  });
+}
 
 function openModal(item) {
   modalBody.innerHTML = `
@@ -190,7 +187,11 @@ function openModal(item) {
     <p>${item.department} / ${item.role}</p>
     <p>${item.startDate} ~ ${item.endDate}</p>
     <h4>Activities</h4>
-    <ul>${item.detail.activities.map(a => `<li>${a}</li>`).join("")}</ul>
+    <ul>
+      ${item.detail.activities.map(a => `<li>${a}</li>`).join("")}
+    </ul>
+    <h4>Files</h4>
+    ${item.detail.path.map(p => `<img src="${p}">`).join("")}
   `;
   modal.style.display = "flex";
 }
@@ -198,14 +199,6 @@ function openModal(item) {
 function closeModal() {
   modal.style.display = "none";
 }
-
-document.querySelectorAll(".sidebar a").forEach(a => {
-  a.onclick = () => {
-    document.querySelectorAll(".sidebar a").forEach(x => x.classList.remove("active"));
-    a.classList.add("active");
-    navTitle.textContent = a.dataset.section;
-  };
-});
 </script>
 
 </body>
