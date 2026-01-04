@@ -1,43 +1,55 @@
 {
   "education": [
     {
-      "startDate": "2008-03-03",
       "endDate": "2014-02-14",
-      "institution": "Daejeon Jijok Elementary School",
-      "degree": "Elementary",
+      "institution": "대전지족초등학교",
+      "degree": null,
       "major": null,
-      "location": "Yuseong-gu, Daejeon, Republic of Korea",
-      "status": "Graduated",
+      "status": "졸업",
+      "detail": {
+        "startDate": "2008-03-03",
+        "location": "대한민국 대전시 유성구",
+        "path": []
+      },
       "visibility": true
     },
     {
-      "startDate": "2014-03-03",
       "endDate": "2017-02-08",
-      "institution": "Daejeon Jijok Middle School",
-      "degree": "Middle",
+      "institution": "대전지족중학교",
+      "degree": null,
       "major": null,
-      "location": "Yuseong-gu, Daejeon, Republic of Korea",
-      "status": "Graduated",
+      "status": "졸업",
+      "detail": {
+        "startDate": "2014-03-03",
+        "location": "대한민국 대전시 유성구",
+        "path": []
+      },
       "visibility": true
     },
     {
-      "startDate": "2017-03-02",
       "endDate": "2020-02-05",
-      "institution": "Daejeon Daeseong High School",
-      "degree": "High",
-      "major": "Science and Engineering",
-      "location": "Jung-gu, Daejeon, Republic of Korea",
-      "status": "Graduated",
+      "institution": "대전대성고등학교",
+      "degree": null,
+      "major": "이공계열",
+      "status": "졸업",
+      "detail": {
+        "startDate": "2017-03-02",
+        "location": "대한민국 대전시 중구",
+        "path": []
+      },
       "visibility": true
     },
     {
-      "startDate": "2020-03-02",
       "endDate": null,
-      "institution": "Ajou University",
-      "degree": "BS",
-      "major": "Electrical and Computer Engineering",
-      "location": "Yeongtong-gu, Suwon, Gyeonggi-do, Republic of Korea",
-      "status": "Enrolled",
+      "institution": "아주대학교",
+      "degree": "학사",
+      "major": "전자공학과",
+      "status": "재학",
+      "detail": {
+        "startDate": "2020-03-02",
+        "location": "대한민국 경기도 수원시 영통구",
+        "path": []
+      },
       "visibility": true
     }
   ]

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xaehn</title>
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+#sidebar-toggle {
+  display: none;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger {
+  position: absolute;
+  left: 1rem;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  left: -220px;
+  width: 220px;
+  height: calc(100% - 50px);
+  background: #111;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  transition: left 0.3s ease;
+  z-index: 1100;
+}
+
+#sidebar-toggle:checked + .nav + .sidebar {
+  left: 0;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: #4a9eff;
+}
+
+main {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.item {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: #eee;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.modal-close {
+  text-align: right;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="sidebar-toggle">
+
+<nav class="nav">
+  <label for="sidebar-toggle" class="hamburger">&#9776;</label>
+  <span class="brand" id="nav-title">xaehn</span>
+</nav>
+
+<div class="sidebar">
+  <a href="#" data-section="Activities">Activities</a>
+  <a href="#" data-section="Awards">Awards</a>
+  <a href="#" data-section="Certifications">Certifications</a>
+  <a href="#" data-section="Education">Education</a>
+  <a href="#" data-section="Experience" class="active">Experience</a>
+  <a href="#" data-section="Language">Language</a>
+  <a href="#" data-section="Lectures">Lectures</a>
+  <a href="#" data-section="Projects">Projects</a>
+  <a href="#" data-section="Volunteering">Volunteering</a>
+</div>
+
+<main>
+  <div class="section-title">Experience</div>
+  <div id="list"></div>
+</main>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    organization: "111",
+    name: "222",
+    department: "333",
+    role: "444",
+    startDate: "2023.01",
+    endDate: "2024.02",
+    detail: {
+      activities: ["A", "B", "C"],
+      path: ["assets/img1.png", "assets/img2.png"]
+    }
+  }
+];
+
+const list = document.getElementById("list");
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modal-body");
+const navTitle = document.getElementById("nav-title");
+
+data.forEach(item => {
+  const div = document.createElement("div");
+  div.className = "item";
+  div.textContent = `${item.startDate} ~ ${item.endDate} ${item.organization} ${item.name} ${item.department} ${item.role}`;
+  div.onclick = () => openModal(item);
+  list.appendChild(div);
+});
+
+function openModal(item) {
+  modalBody.innerHTML = `
+    <h3>${item.organization} - ${item.name}</h3>
+    <p>${item.department} / ${item.role}</p>
+    <p>${item.startDate} ~ ${item.endDate}</p>
+    <h4>Activities</h4>
+    <ul>${item.detail.activities.map(a => `<li>${a}</li>`).join("")}</ul>
+  `;
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+document.querySelectorAll(".sidebar a").forEach(a => {
+  a.onclick = () => {
+    document.querySelectorAll(".sidebar a").forEach(x => x.classList.remove("active"));
+    a.classList.add("active");
+    navTitle.textContent = a.dataset.section;
+  };
+});
+</script>
+
+</body>
+</html>

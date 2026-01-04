@@ -5,11 +5,17 @@
       "awardTitle": "입상",
       "awardLevel": null,
       "awardedDate": "2023-02-06",
-      "organizer": [
-        "아주대학교 교무팀"
-      ],
-      "sponsor": [],
-      "eligibility": "아주대학교 학부생",
+      "detail": {
+        "type": "개인",
+        "role": null,
+        "members": [],
+        "organizer": [
+          "아주대학교 교무팀"
+        ],
+        "sponsor": [],
+        "eligibility": "아주대학교 학부생",
+        "path": []
+      },
       "visibility": true
     },
     {
@@ -17,15 +23,21 @@
       "awardTitle": "우수상",
       "awardLevel": "SW중심대학사업단장상",
       "awardedDate": "2025-05-17",
-      "organizer": [
-        "아주대학교 SW중심대학사업",
-        "ANSI"
-      ],
-      "sponsor": [
-        "SOLVED.AC",
-        "STARLINK"
-      ],
-      "eligibility": "아주대학교 학부생",
+      "detail": {
+        "type": "개인",
+        "role": null,
+        "members": [],
+        "organizer": [
+          "아주대학교 SW중심대학사업",
+          "ANSI"
+        ],
+        "sponsor": [
+          "SOLVED.AC",
+          "STARLINK"
+        ],
+        "eligibility": "아주대학교 학부생",
+        "path": []
+      },
       "visibility": true
     },
     {
@@ -33,13 +45,22 @@
       "awardTitle": "장려상",
       "awardLevel": null,
       "awardedDate": "2025-12-08",
-      "organizer": [
+      "detail": {
+        "type": "팀",
+        "role": "팀원",
+        "members": [
+          "류지영",
+          "탁동현"
+        ],
+        "organizer": [
         "아주대학교 전자공학과",
         "KIAT 반도체특성화대학사업단",
         "GUIP 경기도 대학혁신플랫폼"
-      ],
-      "sponsor": [],
-      "eligibility": "아주대학교 전자공학과 학부생",
+        ],
+        "sponsor": [],
+        "eligibility": "아주대학교 전자공학과 학부생",
+        "path": []
+      },
       "visibility": true
     },
     {
@@ -47,13 +68,21 @@
       "awardTitle": "우수상",
       "awardLevel": null,
       "awardedDate": "2025-12-08",
-      "organizer": [
-        "아주대학교 전자공학과",
-        "KIAT 반도체특성화대학사업단",
-        "GUIP 경기도 대학혁신플랫폼"
-      ],
-      "sponsor": [],
-      "eligibility": "아주대학교 전자공학과 학부생",
+      "detail": {
+        "type": "팀",
+        "role": "팀원",
+        "members": [
+          "류지영"
+        ],
+        "organizer": [
+          "아주대학교 전자공학과",
+          "KIAT 반도체특성화대학사업단",
+          "GUIP 경기도 대학혁신플랫폼"
+        ],
+        "sponsor": [],
+        "eligibility": "아주대학교 전자공학과 학부생",
+        "path": []
+      },
       "visibility": true
     }
   ]

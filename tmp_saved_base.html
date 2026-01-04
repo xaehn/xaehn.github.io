@@ -3,89 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>xaehn Resume</title>
+<title>xaehn</title>
 <style>
   /* --- 전체 body 기본 스타일 --- */
   body {
-    margin: 0; /* 브라우저 기본 여백 제거 */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* 글꼴 설정 */
-    background: #f5f5f5; /* 페이지 배경색 */
-    color: #333; /* 기본 텍스트 색 */
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
   }
 
   /* --- 체크박스 숨김 (토글용) --- */
   #sidebar-toggle {
-    display: none; /* 화면에 표시되지 않음 */
+    display: none;
   }
-  /* 체크박스가 선택된 상태(:checked)인지 아닌지로 사이드바 열림/닫힘 상태를 CSS만으로 제어 */
 
   /* --- 네비게이터 --- */
   .nav {
-    position: sticky; /* 스크롤해도 상단 고정 */
-    top: 0; /* 화면 최상단 위치 */
-    z-index: 1000; /* 사이드바보다 낮게 설정 (사이드바는 1100) */
-    background: #111; /* 배경 색상 */
-    height: 50px; /* 네비 높이 */
-    display: flex; /* 내부 요소 수평 배치 */
-    align-items: center; /* 세로 가운데 정렬 */
-    justify-content: center; /* 가로 가운데 정렬 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #111;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* --- 햄버거 버튼 --- */
   .hamburger {
-    position: absolute; /* 네비 좌측에 고정 */
-    left: 1rem; /* 좌측 여백 */
-    font-size: 1.8rem; /* 버튼 크기 */
-    color: white; /* 글자색 */
-    cursor: pointer; /* 마우스 올리면 포인터 표시 */
-    user-select: none; /* 텍스트 드래그 방지 */
+    position: absolute;
+    left: 1rem;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    user-select: none;
   }
 
-  /* --- 중앙 브랜드 텍스트 --- */
   .brand {
     color: white;
-    font-weight: bold; /* 볼드체 */
+    font-weight: bold;
     font-size: 1.2rem;
-    letter-spacing: 2px; /* 글자 사이 간격 */
+    letter-spacing: 2px;
   }
 
   /* --- 사이드바 --- */
   .sidebar {
-    position: fixed; /* 스크롤과 상관없이 고정 */
-    top: 60px; /* 네비게이터 아래부터 시작 */
-    left: -200px; /* 초기에는 화면 왼쪽 밖으로 숨김 */
-    width: 200px; /* 사이드바 너비 */
-    height: calc(100% - 50px); /* 화면 전체 높이에서 네비 높이 제외 */
+    position: fixed;
+    top: 50px;
+    left: -220px;
+    width: 220px;
+    height: calc(100% - 50px);
     background: #111;
-    padding-top: 1rem; /* 위쪽 여백 */
+    padding-top: 1rem;
     display: flex;
-    flex-direction: column; /* 세로로 메뉴 배치 */
-    transition: left 0.3s ease; /* 슬라이드 애니메이션 */
-    z-index: 1100; /* 네비보다 위 */
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 1100;
   }
 
-  /* --- 햄버거 클릭 시 사이드바 열기/닫기 --- */
   #sidebar-toggle:checked + .nav + .sidebar {
-    left: 0; /* 체크되면 화면 왼쪽으로 이동하여 열림 */
+    left: 0;
   }
-  /* 설명:
-     #sidebar-toggle 체크 여부에 따라
-     + 형제 선택자(nav 다음에 있는 .sidebar) 선택
-     left:0으로 슬라이드 열림 */
 
-  /* --- 사이드바 링크 --- */
   .sidebar a {
-    color: white; /* 글자색 */
-    text-decoration: none; /* 밑줄 제거 */
-    padding: 1rem 1.5rem; /* 여백 */
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
-    font-weight: bold; /* 볼드체 */
-    transition: color 0.3s ease; /* 마우스 올릴 때 색 변화 부드럽게 */
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  .sidebar a:hover {
+    color: #4a9eff;
   }
 
-  /* --- 사이드바 링크 hover 효과 --- */
-  .sidebar a:hover {
-    color: #4a9eff; /* 포인트 색상 */
+  /* --- 메인 콘텐츠 --- */
+  main {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  /* --- 섹션 제목 --- */
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.3rem;
+  }
+
+  .show-all {
+    background: none;
+    border: none;
+    color: #4a9eff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  .show-all:hover {
+    color: #1a6ed8;
+  }
+
+  .section-content {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .section-item {
+    margin: 0.5rem 0;
   }
 
 </style>
@@ -96,25 +131,52 @@
 
   <!-- 네비게이터 -->
   <nav class="nav">
-    <!-- 햄버거 버튼: 체크박스 토글 -->
     <label for="sidebar-toggle" class="hamburger">&#9776;</label>
-    <!-- 중앙 브랜드 텍스트 -->
     <span class="brand">xaehn</span>
   </nav>
 
   <!-- 사이드바 -->
   <div class="sidebar">
-    <!-- 사이드바 링크: 클릭 시 해당 html로 이동 -->
-    <a href="index.html">Activities</a>
-    <a href="projects.html">Projects</a>
-    <a href="work.html">Work Experience</a>
-    <a href="education.html">Education</a>
-    <a href="certifications.html">Certifications</a>
+    <a href="activities.html">Activities</a>
     <a href="awards.html">Awards</a>
-    <a href="lectures.html">Lectures</a>
-    <a href="volunteering.html">Volunteering</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="education.html">Education</a>
+    <a href="experience.html">Experience</a>
     <a href="language.html">Language</a>
-    <a href="resume.html">Resume</a>
+    <a href="lectures.html">Lectures</a>
+    <a href="projects.html">Projects</a>
+    <a href="volunteering.html">Volunteering</a>
   </div>
+
+  <main>
+    <!-- Education 섹션 -->
+    <div class="section">
+      <div class="section-title">
+        <span>Education</span>
+        <button class="show-all">Show All →</button>
+      </div>
+      <div class="section-content">
+        <div class="section-item">
+          Ajou University, B.Sc. in Electrical and Computer Engineering, Suwon, Korea (2025)
+        </div>
+        <div class="section-item">
+          Daejeon Daeseong High School, Science & Engineering, Daejeon, Korea (2022)
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects 섹션 -->
+    <div class="section">
+      <div class="section-title">
+        <span>Projects</span>
+        <button class="show-all">Show All →</button>
+      </div>
+      <div class="section-content">
+        <div class="section-item">IoT Smart Home System</div>
+        <div class="section-item">Autonomous Robot Navigation</div>
+      </div>
+    </div>
+
+  </main>
 </body>
 </html>

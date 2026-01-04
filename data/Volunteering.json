@@ -4,17 +4,20 @@
       "name": "영통구 정서학습멘토링",
       "startDate": "2023-04-01",
       "endDate": "2023-04-01",
-      "startTime": "20:00",
-      "endTime": "23:00",
       "totalTime": 3,
-      "organizer": [
-        "영통구청"
-      ],
-      "platform": "1365",
-      "category": "상담·멘토링",
-      "mode": "Offline",
-      "title": "영통구 정서학습멘토링",
-      "description": "자원봉사대학생이 저소득학생과 1:1결연을 맺고 학습지도 및 진로 고민상담서비스 제공",
+      "detail": {
+        "startTime": "20:00",
+        "endTime": "23:00",
+        "organizer": [
+          "영통구청"
+        ],
+        "platform": "1365",
+        "category": "상담·멘토링",
+        "mode": "Offline",
+        "title": "영통구 정서학습멘토링",
+        "description": "자원봉사대학생이 저소득학생과 1:1결연을 맺고 학습지도 및 진로 고민상담서비스 제공",
+        "path": []
+      },
       "visibility": true
     }
   ]

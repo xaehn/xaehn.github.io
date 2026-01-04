@@ -1,27 +1,88 @@
 {
   "lectures": [
     {
+      "name": "[현직자 직무특강] 유퀴즈 온더 현직 - 디스플레이 패널 설계/LG디스플레이",
+      "startDate": "2022-11-25",
+      "endDate": "2022-11-25",
+      "detail": {
+        "totalTime": 2,
+        "organizer": [
+          "아주대학교 대학일자리플러스센터"
+        ],
+        "mode": "Online",
+        "status": "Completed",
+        "path": [
+          "assets/Lectures/[현직자 직무특강] 유퀴즈 온더 현직 - 디스플레이 패널 설계(LG디스플레이).png"
+        ]
+      },
+      "visibility": true
+    },
+    {
+      "name": "[현직자 직무특강] 유퀴즈 온더 현직 - IT 개발자/우아한형제들",
+      "startDate": "2022-11-28",
+      "endDate": "2022-11-28",
+      "detail": {
+        "totalTime": 2,
+        "organizer": [
+          "아주대학교 대학일자리플러스센터"
+        ],
+        "mode": "Online",
+        "status": "Completed",
+        "path": [
+          "assets/Lectures/[현직자 직무특강] 유퀴즈 온더 현직 - IT 개발자(우아한형제들).png"
+        ]
+      },
+      "visibility": true
+    },
+    {
       "name": "반도체 생산 및 공정 기술 이론",
       "startDate": "2023-01-16",
       "endDate": "2023-01-26",
-      "totalTime": "",
-      "organizer": [
-        "한국반도체산업협회"
-      ],
-      "mode": "Online",
-      "status": "Completed",
+      "detail": {
+        "totalTime": 4,
+        "organizer": [
+          "한국반도체산업협회"
+        ],
+        "mode": "Online",
+        "status": "Completed",
+        "path": [
+          "assets/Lectures/반도체 생산 및 공정 기술 이론.png"
+        ]
+      },
       "visibility": true
     },
     {
       "name": "회로설계 핵심이론 및 시뮬레이션",
       "startDate": "2023-01-16",
       "endDate": "2023-01-26",
-      "totalTime": "",
-      "organizer": [
-        "한국반도체산업협회"
-      ],
-      "mode": "Online",
-      "status": "Completed",
+      "detail": {
+        "totalTime": 7,
+        "organizer": [
+          "한국반도체산업협회"
+        ],
+        "mode": "Online",
+        "status": "Completed",
+        "path": [
+          "assets/Lectures/회로설계 핵심이론 및 시뮬레이션.png"
+        ]
+      },
+      "visibility": true
+    },
+    {
+      "name": "[거점형] 일잘러가 되기 위한 생성형 AI 실전 활용 과정",
+      "startDate": "2025-08-25",
+      "endDate": "2025-08-27",
+      "detail": {
+        "totalTime": 18,
+        "organizer": [
+          "아주대학교 대학일자리플러스센터"
+        ],
+        "mode": "Online",
+        "status": "Completed",
+        "path": [
+          "assets/Lectures/[거점형] 일잘러가 되기 위한 생성형 AI 실전 활용 과정.png"
+        ]
+      },
       "visibility": true
     }
   ]

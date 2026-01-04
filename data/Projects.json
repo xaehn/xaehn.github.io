@@ -1,0 +1,27 @@
+{
+  "projects": [
+    {
+      "name": "",
+      "startDate": "",
+      "endDate": "",
+      "detail": {
+        "description": "",
+        "type": "",
+        "role": null,
+        "members": [],
+        "stacks": {
+
+        },
+        "status": "",
+        "path": [],
+        "links": {
+          "github": null,
+          "demo": null,
+          "award": null,
+          "paper": null
+        }
+      },
+      "visibility": true
+    }
+  ]
+}

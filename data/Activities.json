@@ -1,0 +1,130 @@
+{
+  "activities": [
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "네트로닉스",
+      "department": "시스템부",
+      "role": "부원",
+      "startDate": "2023-03-02",
+      "endDate": "2023-08-31",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "네트로닉스",
+      "department": "웹부",
+      "role": "부원",
+      "startDate": "2023-03-02",
+      "endDate": "2023-08-31",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 중앙동아리",
+      "name": "호롱불",
+      "department": null,
+      "role": "부원",
+      "startDate": "2023-03-02",
+      "endDate": "2023-08-31",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "네트로닉스",
+      "department": "웹개발부",
+      "role": "부원",
+      "startDate": "2023-09-01",
+      "endDate": "2024-03-03",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과",
+      "name": "비상대책위원회",
+      "department": "복지국",
+      "role": "국원",
+      "startDate": "2023-09-01",
+      "endDate": "2024-03-03",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "하늘음표",
+      "department": "연출부",
+      "role": "부원",
+      "startDate": "2023-09-01",
+      "endDate": "2023-12-21",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "하늘음표",
+      "department": null,
+      "role": "부회장",
+      "startDate": "2023-12-22",
+      "endDate": "2024-12-20",
+      "detail": {
+        "activities": [
+          {
+            "title": "",
+            "scale": "",
+            "description": ""
+          }
+        ],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 전자공학과 소학회",
+      "name": "하늘음표",
+      "department": "연출부",
+      "role": "부원",
+      "startDate": "2024-12-21",
+      "endDate": null,
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 지능형반도체공학과 소학회",
+      "name": "설회",
+      "department": "빅데이터·파이썬부",
+      "role": "부장",
+      "startDate": "2024-03-04",
+      "endDate": "2025-03-03",
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    },
+    {
+      "organization": "아주대학교 지능형반도체공학과 소학회",
+      "name": "설회",
+      "department": "인공지능부",
+      "role": "부원",
+      "startDate": "2025-03-04",
+      "endDate": null,
+      "detail": {
+        "activities": [],
+        "path": []
+      }
+    }
+  ]
+}

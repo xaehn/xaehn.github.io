@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xaehn</title>
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+  }
+  #sidebar-toggle {
+    display: none;
+  }
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #111;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hamburger {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+  }
+  .brand {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+  }
+  .sidebar {
+    position: fixed;
+    top: 50px;
+    left: -220px;
+    width: 220px;
+    height: calc(100% - 50px);
+    background: #111;
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 1100;
+  }
+  #sidebar-toggle:checked + .nav + .sidebar {
+    left: 0;
+  }
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease, background 0.3s ease;
+    cursor: pointer;
+  }
+  .sidebar a:hover {
+    color: #4a9eff;
+  }
+  .sidebar a.active {
+    color: #4a9eff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  main {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .list-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .list-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .item-date {
+    color: #666;
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+  .item-org {
+    font-weight: bold;
+    color: #111;
+  }
+  .item-content {
+    color: #444;
+  }
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-window {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #999;
+  }
+  .modal-close:hover {
+    color: #333;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.5rem;
+  }
+  .modal-meta {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  .modal-detail-section h4 {
+    margin-bottom: 0.5rem;
+    color: #111;
+  }
+  .modal-detail-list {
+    list-style: disc;
+    padding-left: 1.2rem;
+    color: #444;
+  }
+  .section {
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.3rem;
+  }
+  .show-all {
+    background: none;
+    border: none;
+    color: #4a9eff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  .show-all:hover {
+    color: #1a6ed8;
+  }
+  .section-content {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
+  .section-item {
+    margin: 0.5rem 0;
+  }
+</style>
+</head>
+<body>
+  <input type="checkbox" id="sidebar-toggle">
+
+  <nav class="nav">
+    <label for="sidebar-toggle" class="hamburger">&#9776;</label>
+    <span class="brand" id="nav-brand" onclick="renderHome()">xaehn</span>
+  </nav>
+
+  <div class="sidebar">
+    <a href="#" onclick="renderList('Activities')">Activities</a>
+    <a href="#" onclick="renderList('Awards')">Awards</a>
+    <a href="#" onclick="renderList('Certifications')">Certifications</a>
+    <a href="#" onclick="renderList('Education')">Education</a>
+    <a href="#" onclick="renderList('Experience')">Experience</a>
+    <a href="#" onclick="renderList('Language')">Language</a>
+    <a href="#" onclick="renderList('Lectures')">Lectures</a>
+    <a href="#" onclick="renderList('Projects')">Projects</a>
+    <a href="#" onclick="renderList('Volunteering')">Volunteering</a>
+  </div>
+
+  <main id="main-container">
+  </main>
+
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-window">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+<script>
+  const db = {
+    "Education": [
+      {
+        "organization": "Ajou University",
+        "name": "B.Sc. in Electrical and Computer Engineering",
+        "department": "Engineering College",
+        "role": "Student",
+        "startDate": "2019.03",
+        "endDate": "2025.02",
+        "detail": {
+          "activities": ["Capstone Design Project", "Academic Club Leader"],
+          "path": []
+        }
+      },
+      {
+        "organization": "Daejeon Daeseong High School",
+        "name": "High School Diploma",
+        "department": "Science & Engineering",
+        "role": "Student",
+        "startDate": "2019.03",
+        "endDate": "2022.02",
+        "detail": {
+          "activities": ["Physics Club", "Math Competition"],
+          "path": []
+        }
+      }
+    ],
+    "Projects": [
+      {
+        "organization": "Personal",
+        "name": "IoT Smart Home System",
+        "department": "Development",
+        "role": "Full Stack Developer",
+        "startDate": "2024.01",
+        "endDate": "2024.06",
+        "detail": {
+          "activities": ["Designed PCB", "Implemented MQTT Protocol"],
+          "path": ["github.com/example/iot"]
+        }
+      },
+      {
+        "organization": "Team Project",
+        "name": "Autonomous Robot Navigation",
+        "department": "R&D",
+        "role": "Algorithm Engineer",
+        "startDate": "2023.09",
+        "endDate": "2023.12",
+        "detail": {
+          "activities": ["SLAM implementation", "ROS2 integration"],
+          "path": []
+        }
+      }
+    ]
+  };
+
+  const dashboardHTML = `
+    <div class="section">
+      <div class="section-title">
+        <span>Education</span>
+        <button class="show-all" onclick="renderList('Education')">Show All →</button>
+      </div>
+      <div class="section-content">
+        <div class="section-item">Ajou University, B.Sc. in Electrical and Computer Engineering (2025)</div>
+        <div class="section-item">Daejeon Daeseong High School (2022)</div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">
+        <span>Projects</span>
+        <button class="show-all" onclick="renderList('Projects')">Show All →</button>
+      </div>
+      <div class="section-content">
+        <div class="section-item">IoT Smart Home System</div>
+        <div class="section-item">Autonomous Robot Navigation</div>
+      </div>
+    </div>
+  `;
+
+  function renderHome() {
+    document.getElementById('nav-brand').innerText = 'xaehn';
+    document.getElementById('main-container').innerHTML = dashboardHTML;
+    
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => link.classList.remove('active'));
+    
+    document.getElementById('sidebar-toggle').checked = false;
+  }
+
+  function renderList(category) {
+    document.getElementById('nav-brand').innerText = category;
+    
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => {
+      link.classList.remove('active');
+      if(link.innerText === category) {
+        link.classList.add('active');
+      }
+    });
+
+    const dataList = db[category] || [];
+    const container = document.getElementById('main-container');
+    
+    if (dataList.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:2rem; color:#666;">No data available for ${category}</div>`;
+    } else {
+      let html = '<div class="list-container">';
+      dataList.forEach((item, index) => {
+        const displayStr = `<span class="item-date">${item.startDate} ~ ${item.endDate}</span> <span class="item-org">${item.organization}</span> <span class="item-content">${item.name} ${item.department} ${item.role}</span>`;
+        
+        html += `
+          <div class="list-item" onclick="openModal('${category}', ${index})">
+            ${displayStr}
+          </div>
+        `;
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+    
+    document.getElementById('sidebar-toggle').checked = false;
+  }
+
+  function openModal(category, index) {
+    const item = db[category][index];
+    const modal = document.getElementById('detail-modal');
+    const content = document.getElementById('modal-content');
+
+    let activitiesHtml = '';
+    if (item.detail.activities && item.detail.activities.length > 0) {
+      activitiesHtml = '<h4>Activities</h4><ul class="modal-detail-list">';
+      item.detail.activities.forEach(act => {
+        activitiesHtml += `<li>${act}</li>`;
+      });
+      activitiesHtml += '</ul>';
+    }
+
+    let pathHtml = '';
+    if (item.detail.path && item.detail.path.length > 0) {
+      pathHtml = '<h4>Links</h4><ul class="modal-detail-list">';
+      item.detail.path.forEach(p => {
+        pathHtml += `<li>${p}</li>`;
+      });
+      pathHtml += '</ul>';
+    }
+
+    content.innerHTML = `
+      <div class="modal-title">${item.name}</div>
+      <div class="modal-meta">
+        <strong>Organization:</strong> ${item.organization}<br>
+        <strong>Department:</strong> ${item.department}<br>
+        <strong>Role:</strong> ${item.role}<br>
+        <strong>Period:</strong> ${item.startDate} ~ ${item.endDate}
+      </div>
+      <div class="modal-detail-section">
+        ${activitiesHtml}
+        ${pathHtml}
+      </div>
+    `;
+
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('detail-modal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('detail-modal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  renderHome();
+</script>
+</body>
+</html>
